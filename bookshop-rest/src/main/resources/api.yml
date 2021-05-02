@@ -1,0 +1,43 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: BookShop
+paths:
+  /books:
+    get:
+      summary: List all books by criteria
+      operationId: listBooks
+      tags:
+        - pets
+      parameters:
+        - name: title
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: found books by criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BooksResponse"
+components:
+  schemas:
+    BooksResponse:
+      type: array
+      items:
+        type: object
+        $ref: "#/components/schemas/Book"
+    Book:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        authors:
+          type: array
+          items:
+            type: string
